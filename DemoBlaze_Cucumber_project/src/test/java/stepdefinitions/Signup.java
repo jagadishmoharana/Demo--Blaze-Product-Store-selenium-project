@@ -2,21 +2,16 @@ package stepdefinitions;
 
 import java.time.Duration;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.LoginPage;
 import pages.SignupPage;
 
 public class Signup {
@@ -25,21 +20,14 @@ public class Signup {
 	WebDriverWait wait;
 	
 	SignupPage signup;
-    @Before
-    public void setup() {
-    	 driver = new ChromeDriver();
-         driver.manage().window().maximize();
-         wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
-         signup = new SignupPage(driver);
-    }
 
-    @After
-    public void teardown() {
-        driver.quit();
-    }
     
 	@Given("User is on the Sign up page")
 	public void user_is_on_the_sign_up_page() {
+		 driver = new ChromeDriver();
+         driver.manage().window().maximize();
+         wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
+         signup = new SignupPage(driver);
 		 signup.visit_signup();
 	}
 
@@ -62,6 +50,7 @@ public class Signup {
 	public void user_should_successfully_signup_and_should_be_display(String string) {
         String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
         Assert.assertTrue(alertText.equals(string));
+        driver.quit();
 	}
 
 	@And("User enter invalid password {string} into Password field")
@@ -73,6 +62,7 @@ public class Signup {
 	public void user_should_not_able_to_signup_and_get_an_message(String string) {
         String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
         Assert.assertTrue(alertText.equals(string));
+        driver.quit();
 	}
 
 	@When("User leave Username field as blank")
@@ -89,5 +79,6 @@ public class Signup {
 	public void user_should_get_and_not_able_to_signup(String string) {
         String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
         Assert.assertTrue(alertText.equals(string));
+        driver.quit();
 	}
 }

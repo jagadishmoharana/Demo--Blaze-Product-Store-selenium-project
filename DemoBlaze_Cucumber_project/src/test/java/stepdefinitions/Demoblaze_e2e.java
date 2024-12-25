@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,27 +28,19 @@ public class Demoblaze_e2e {
 	ProductPage product;
 	CartPage cart;
 	LogoutPage logout;
-	@Before
-    public void setUp() {
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
-            login = new LoginPage(driver);
-            home = new HomePage(driver);
-            product = new ProductPage(driver);
-            cart = new CartPage(driver);
-            logout = new LogoutPage(driver);
-    }
 
-    @After
-    public void tearDown() {
-            driver.quit(); 
-    }
-    
     
 
     @Given("User navigate to  login page")
     public void user_navigate_to_login_page() {
+    	driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
+        login = new LoginPage(driver);
+        home = new HomePage(driver);
+        product = new ProductPage(driver);
+        cart = new CartPage(driver);
+        logout = new LogoutPage(driver);
     	login.visit_login();
     }
 
@@ -141,5 +131,6 @@ public class Demoblaze_e2e {
 				By.id("login2")
 		));
 		Assert.assertTrue(Login.getText().equals("Log in"));
+		driver.quit(); 
 	}
 }

@@ -4,14 +4,11 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,23 +21,15 @@ public class Login {
 	WebDriverWait wait;
 	
 	LoginPage login;
-    @Before
-    public void setup() {
-       
-    	 driver = new ChromeDriver();
-         driver.manage().window().maximize();
-         wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
-         login = new LoginPage(driver);
-    }
 
-    @After
-    public void teardown() {
-        driver.quit();
-    }
 
 
     @Given("User is on the login page")
     public void user_is_on_the_login_page() {
+   	 driver = new ChromeDriver();
+     driver.manage().window().maximize();
+     wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
+     login = new LoginPage(driver);
     	login.visit_login();
     }
 
@@ -63,6 +52,7 @@ public class Login {
     public void user_should_successfully_login_and_should_be_display(String string) {
         String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nameofuser"))).getText();
         Assert.assertTrue(text.equals(string));
+        driver.quit();
     }
 
     @When("User enter invalid password {string} into password field")
@@ -74,6 +64,7 @@ public class Login {
     public void user_should_not_able_to_login_and_get_an_message(String string) {
         String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
         Assert.assertTrue(alertText.equals(string));
+        driver.quit();
     }
 
     @When("User enter invalid username {string} into username field")
@@ -95,5 +86,6 @@ public class Login {
     public void user_should_get_and_not_able_to_login(String string) {
         String alertText = wait.until(ExpectedConditions.alertIsPresent()).getText();
         Assert.assertTrue(alertText.equals(string));
+        driver.quit();
     }
 }
