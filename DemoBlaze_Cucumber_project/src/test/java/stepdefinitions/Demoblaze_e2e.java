@@ -5,11 +5,11 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,15 +33,14 @@ public class Demoblaze_e2e {
 
     @Given("User navigate to  login page")
     public void user_navigate_to_login_page() {
-    	driver = new ChromeDriver();
-        driver.manage().window().maximize();
+       	driver = DriverFactory.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(15)); 
         login = new LoginPage(driver);
         home = new HomePage(driver);
         product = new ProductPage(driver);
         cart = new CartPage(driver);
         logout = new LogoutPage(driver);
-    	login.visit_login();
+    	login.visitLogin();
     }
 
     @When("User enters valid username {string} into username field")

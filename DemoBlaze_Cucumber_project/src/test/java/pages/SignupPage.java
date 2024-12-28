@@ -18,7 +18,6 @@ public class SignupPage {
 	
 	
 	public void visit_signup() {
-		driver.get("https://www.demoblaze.com/");
 	     wait.until(ExpectedConditions.elementToBeClickable(By.id("signin2"))).click();
 	}
 	public void setUsername(String str) {

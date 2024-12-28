@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 //With TestNG
 @CucumberOptions(
 		features = "src/test/resources/features/DemoBlaze_e2e.feature",
-		glue="stepdefinitions",
+		glue={"stepdefinitions","hooks"},
 		dryRun=false,
 		plugin={"pretty", "html:target/cucumber.reports", "json:target/cucumber.json"},
 		monochrome= true,
