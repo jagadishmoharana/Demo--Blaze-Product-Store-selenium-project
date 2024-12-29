@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: runners.Test_DemoBlaze_e2e_runner
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.17 s -- in runners.Test_DemoBlaze_e2e_runner
