@@ -1,5 +1,4 @@
 Feature: Login
-
 Scenario: Login with valid credentials
   Given User is on the login page
   When User enter valid username "Jagadish" into username field
